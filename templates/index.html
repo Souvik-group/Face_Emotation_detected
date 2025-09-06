@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Vision 😃</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { margin-top: 20px; }
+        img { max-width: 80%; margin-top: 15px; border: 2px solid #ccc; border-radius: 10px; }
+        .flash { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Emotion Vision 😃</h1>
+    <p>Face detection + emotion classification (Flask version)</p>
+
+    <!-- Upload Image -->
+    <div class="container">
+        <h2>Upload Image</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    {% if uploaded_image %}
+        <h3>Result</h3>
+        <img src="{{ url_for('static', filename='uploads/' + uploaded_image.split('/')[-1]) }}" alt="Result">
+        <p><strong>{{ labels }}</strong></p>
+    {% endif %}
+
+    <hr>
+
+    <!-- Webcam Mode -->
+    <div class="container">
+        <h2>Live Webcam</h2>
+        <img src="{{ url_for('video_feed') }}" alt="Webcam Feed">
+    </div>
+</body>
+</html>
